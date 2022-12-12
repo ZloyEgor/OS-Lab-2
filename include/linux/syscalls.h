@@ -71,6 +71,10 @@ struct clone_args;
 struct open_how;
 struct mount_attr;
 struct landlock_ruleset_attr;
+
+//Lab structs
+struct lab_lsmod_module_info;
+
 enum landlock_rule_type;
 
 #include <linux/types.h>
@@ -1386,5 +1390,12 @@ int __sys_getsockopt(int fd, int level, int optname, char __user *optval,
 		int __user *optlen);
 int __sys_setsockopt(int fd, int level, int optname, char __user *optval,
 		int optlen);
+//Hello world syscall
 asmlinkage long __amd64_sys_hello(int i);
+
+//Lab syscall
+asmlinkage long sys_lab_lsmod_count(long *modules_count);
+
+asmlinkage long sys_lab_lsmod(struct lab_lsmod_module_info *modules_ptr);
+
 #endif

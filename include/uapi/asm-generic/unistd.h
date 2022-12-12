@@ -886,8 +886,14 @@ __SYSCALL(__NR_futex_waitv, sys_futex_waitv)
 #define __NR_hello 450
 __SYSCALL(__NR_hello, sys_hello)
 
+#define __NR_lab_lsmod_count 451
+__SYSCALL(__NR_lab_lsmod_count, sys_lab_lsmod_count)
+
+#define __NR_lab_lsmod 452
+__SYSCALL(__NR_lab_lsmod, sys_lab_lsmod)
+
 #undef __NR_syscalls
-#define __NR_syscalls 451
+#define __NR_syscalls 453
 
 /*
  * 32 bit systems traditionally used different

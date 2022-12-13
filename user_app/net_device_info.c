@@ -9,7 +9,6 @@
 
 static struct lab_net_device_info {
     char name[IFNAMSIZ];
-    unsigned long trans_start;
     unsigned long watchdog_timeo;
     unsigned char irq;
 };
@@ -20,7 +19,7 @@ static long __lab_net_device(char* device_name, struct lab_net_device_info *net_
 
 static void print_net_device(struct lab_net_device_info *info) {
     printf("Name:\t\t%s\n", info->name);
-    printf("trans_start:\t%ld\n", info->trans_start);
+//    printf("trans_start:\t%ld\n", info->trans_start);
     printf("watchdog_timeo:\t%ld\n", info->watchdog_timeo);
     printf("irq:\t\t%c\n", info->irq);
 //    printf("mem_end:\t%ld\n", info->mem_end);

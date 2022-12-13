@@ -13,30 +13,30 @@ static struct lab_net_device_info {
     unsigned long mem_start;
     unsigned long base_addr;
     unsigned char dma;
-}
+};
 
-static long __lab_net_device_info(char* device_name, struct lab_net_device_info *net_device_info) {
+static long __lab_net_device(char* device_name, struct lab_net_device_info *net_device_info) {
     return syscall(__NR_lab_net_device, device_name, strlen(device_name), net_device_info);
 }
 
 static void print_net_device(struct lab_net_device_info *info) {
-    printf("Name:\t%s\n", info->name);
-    printf("mem_start:\t%s\n", info->mem_start);
-    printf("mem_end:\t%s\n", info->mem_end);
-    printf("base_addr:\t%s\n", info->base_addr);
-    printf("dma:\t%s\n", info->dma);
+    printf("Name:\t\t%s\n", info->name);
+    printf("mem_start:\t%ld\n", info->mem_start);
+    printf("mem_end:\t%ld\n", info->mem_end);
+    printf("base_addr:\t%ld\n", info->base_addr);
+    printf("dma:\t\t%c\n", info->dma);
 }
 
 int main(int argc, char **argv) {
-    if (argc == 0) {
+    if (argc <= 1) {
         printf("Please specify name of device\n");
         return -1;
     }
-    if (argc > 1) {
+    if (argc > 2) {
         printf("Too many arguments, please specify name of device\n");
         return -1;
     }
-    char* device_name = *argv;
+    char* device_name = *(argv + 1);
 
     struct lab_net_device_info *info = malloc(sizeof(struct lab_net_device_info));
 

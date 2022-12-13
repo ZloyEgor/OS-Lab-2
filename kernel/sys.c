@@ -42,6 +42,7 @@
 #include <linux/version.h>
 #include <linux/ctype.h>
 #include <linux/module.h>
+#include <linux/netdevice.h>
 #include <linux/syscall_user_dispatch.h>
 
 #include <linux/compat.h>

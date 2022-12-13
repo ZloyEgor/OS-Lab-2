@@ -15,8 +15,8 @@ static struct lab_net_device_info {
     unsigned char dma;
 }
 
-static long __lab_net_device_info(struct lab_net_device_info *net_device_info) {
-    return syscall(__NR_lab_net_device, net_device_info);
+static long __lab_net_device_info(char* device_name, struct lab_net_device_info *net_device_info) {
+    return syscall(__NR_lab_net_device, device_name, strlen(device_name), net_device_info);
 }
 
 static void print_net_device(struct lab_net_device_info *info) {
@@ -40,7 +40,7 @@ int main(int argc, char **argv) {
 
     struct lab_net_device_info *info = malloc(sizeof(struct lab_net_device_info));
 
-    long ret_code = __lab_net_device(device_name, strlen(device_name), info);
+    long ret_code = __lab_net_device(device_name, info);
 
     if(ret_code < 0) {
         printf("System call __lab_net_device error occurred\n");

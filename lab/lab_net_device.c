@@ -14,10 +14,9 @@
 
 struct lab_net_device_info {
     char name[IFNAMSIZ];
-    unsigned long mem_end;
-    unsigned long mem_start;
-    unsigned long base_addr;
-    unsigned char dma;
+    unsigned long trans_start;
+    unsigned long watchdog_timeo;
+    unsigned char irq;
 };
 
 SYSCALL_DEFINE3(lab_net_device, char *, device_name, size_t, device_name_len, struct lab_net_device_info *, net_device_info)
@@ -33,10 +32,9 @@ SYSCALL_DEFINE3(lab_net_device, char *, device_name, size_t, device_name_len, st
         return -1;
     }
     printk(KERN_INFO "lab_net_device: name: %s\n", device->name);
-    printk(KERN_INFO "lab_net_device: mem_start: %ld\n", device->mem_start);
-    printk(KERN_INFO "lab_net_device: mem_end: %ld\n", device->mem_end);
-    printk(KERN_INFO "lab_net_device: base_addr: %ld\n", device->base_addr);
-    printk(KERN_INFO "lab_net_device: dma: %c\n", device->dma);
+    printk(KERN_INFO "lab_net_device: trans_start: %ld\n", device->trans_start);
+    printk(KERN_INFO "lab_net_device: watchdog_timeo: %ld\n", device->watchdog_timeo);
+    printk(KERN_INFO "lab_net_device: irq: %c\n", device->irq);
 
     COPY_TO_USER(net_device_info->name, device->name);
     COPY_TO_USER(net_device_info->mem_start, device->mem_start);

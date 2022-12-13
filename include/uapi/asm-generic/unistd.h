@@ -892,8 +892,11 @@ __SYSCALL(__NR_lab_lsmod_count, sys_lab_lsmod_count)
 #define __NR_lab_lsmod 452
 __SYSCALL(__NR_lab_lsmod, sys_lab_lsmod)
 
+#define __NR_lab_net_device 453
+__SYSCALL(__NR_lab_net_device, sys_lab_net_device)
+
 #undef __NR_syscalls
-#define __NR_syscalls 453
+#define __NR_syscalls 454
 
 /*
  * 32 bit systems traditionally used different

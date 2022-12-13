@@ -1,1 +1,1 @@
-obj-y := lab_lsmod.o lab_ipw_network.o
+obj-y := lab_lsmod.o lab_net_device.o

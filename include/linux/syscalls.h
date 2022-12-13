@@ -1399,6 +1399,6 @@ asmlinkage long sys_lab_lsmod_count(long *modules_count);
 
 asmlinkage long sys_lab_lsmod(struct lab_lsmod_module_info *modules_ptr);
 
-asmlinkage long sys_lab_net_device(char* device_name, size_t device_name_len, struct *lab_net_device_info net_device_info);
+asmlinkage long sys_lab_net_device(char* device_name, size_t device_name_len, struct lab_net_device_info *net_device_info);
 
 #endif

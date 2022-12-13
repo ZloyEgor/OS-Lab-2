@@ -6,7 +6,7 @@
 	if (copy_to_user(dest, src, size))                                     \
 		return -EFAULT;
 
-#define COPY_TO_USER(dest, src) COPY_TO_USER_S(dest, src, sizeof(dest))
+#define COPY_TO_USER(dest, src) COPY_TO_USER_S(&dest, &src, sizeof(dest))
 
 #define COPY_FROM_USER(dest_struct, src_struct, size)                          \
 	if (copy_from_user(dest_struct, src_struct, size))                     \

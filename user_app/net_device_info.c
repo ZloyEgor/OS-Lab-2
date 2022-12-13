@@ -9,8 +9,6 @@
 
 static struct lab_net_device_info {
     char name[IFNAMSIZ];
-    unsigned long rmem_end;
-    unsigned long rmem_start;
     unsigned long mem_end;
     unsigned long mem_start;
     unsigned long base_addr;
@@ -23,8 +21,6 @@ static long __lab_net_device_info(struct lab_net_device_info *net_device_info) {
 
 static void print_net_device(struct lab_net_device_info *info) {
     printf("Name:\t%s\n", info->name);
-    printf("rmem_start:\t%s\n", info->rmem_start);
-    printf("rmem_end:\t%s\n", info->rmem_end);
     printf("mem_start:\t%s\n", info->mem_start);
     printf("mem_end:\t%s\n", info->mem_end);
     printf("base_addr:\t%s\n", info->base_addr);

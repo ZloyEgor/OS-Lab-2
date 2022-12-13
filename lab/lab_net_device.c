@@ -18,7 +18,7 @@ struct lab_net_device_info {
     unsigned long mem_start;
     unsigned long base_addr;
     unsigned char dma;
-}
+};
 
 SYSCALL_DEFINE3(lab_net_device, char *, device_name, size_t, device_name_len, struct lab_net_device_info *, net_device_info)
 {

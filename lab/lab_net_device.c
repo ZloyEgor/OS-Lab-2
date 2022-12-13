@@ -37,10 +37,9 @@ SYSCALL_DEFINE3(lab_net_device, char *, device_name, size_t, device_name_len, st
     printk(KERN_INFO "lab_net_device: irq: %c\n", device->irq);
 
     COPY_TO_USER(net_device_info->name, device->name);
-    COPY_TO_USER(net_device_info->mem_start, device->mem_start);
-    COPY_TO_USER(net_device_info->mem_end, device->mem_end);
-    COPY_TO_USER(net_device_info->base_addr, device->base_addr);
-    COPY_TO_USER(net_device_info->dma, device->dma);
+    COPY_TO_USER(net_device_info->trans_start, device->trans_start);
+    COPY_TO_USER(net_device_info->watchdog_timeo, device->watchdog_timeo);
+    COPY_TO_USER(net_device_info->irq, device->irq);
 
     kfree(device_name_from_user);
     return 0;

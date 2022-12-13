@@ -32,7 +32,12 @@ SYSCALL_DEFINE3(lab_net_device, char *, device_name, size_t, device_name_len, st
         printk(KERN_ERR "Can't obtain device\n");
         return -1;
     }
-    printk(KERN_INFO "Obtained device: %s\n", device->name);
+    printk(KERN_INFO "lab_net_device: name: %s\n", device->name);
+    printk(KERN_INFO "lab_net_device: mem_start: %ld\n", device->mem_start);
+    printk(KERN_INFO "lab_net_device: mem_end: %ld\n", device->mem_end);
+    printk(KERN_INFO "lab_net_device: base_addr: %ld\n", device->base_addr);
+    printk(KERN_INFO "lab_net_device: dma: %c\n", device->dma);
+
     COPY_TO_USER(net_device_info->name, device->name);
     COPY_TO_USER(net_device_info->mem_start, device->mem_start);
     COPY_TO_USER(net_device_info->mem_end, device->mem_end);

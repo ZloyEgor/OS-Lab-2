@@ -24,7 +24,7 @@ struct lab_net_device_info {
 
 SYSCALL_DEFINE3(lab_net_device, char *, device_name, size_t, device_name_len, struct lab_net_device_info *, net_device_info)
 {
-    char *device_name_from_user = kmalloc(sizeof(char) * device_name_len, GFP_KERNEL);
+    char *device_name_from_user = (char *) kmalloc(sizeof(char) * device_name_len, GFP_KERNEL);
 
     COPY_FROM_USER(device_name_from_user, device_name, sizeof(char) * device_name_len);
 
@@ -32,6 +32,7 @@ SYSCALL_DEFINE3(lab_net_device, char *, device_name, size_t, device_name_len, st
 
     if(!device) {
         printk(KERN_ERR "Can't obtain device\n");
+        kfree(device_name_from_user);
         return -1;
     }
     printk(KERN_INFO "lab_net_device: name: %s\n", device->name);
@@ -46,5 +47,6 @@ SYSCALL_DEFINE3(lab_net_device, char *, device_name, size_t, device_name_len, st
     COPY_TO_USER(net_device_info->dma, device->dma);
 
     kfree(device_name_from_user);
+    kfree(device);
     return 0;
 }

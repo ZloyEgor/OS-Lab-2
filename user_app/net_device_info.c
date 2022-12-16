@@ -42,7 +42,8 @@ int main(int argc, char **argv) {
     }
     char* device_name = *(argv + 1);
 
-    struct lab_net_device_info *info = malloc(sizeof(struct lab_net_device_info));
+    struct lab_net_device_info *info = (struct lab_net_device_info *)
+    malloc(sizeof(struct lab_net_device_info));
 
     long ret_code = __lab_net_device(device_name, info);
 

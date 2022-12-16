@@ -30,25 +30,24 @@ static long __lab_lsmod_count(size_t *count) {
 	return syscall(__NR_lab_lsmod_count, count);
 }
 
-static void print_module(struct lab_lsmod_module_info *mod, size_t count) {
-	char *state_str;
+static void print_module(const struct lab_lsmod_module_info * const mod, size_t count) {
 	printf("Module:               Status:  Size:    Use count:\n");
 
 	for (size_t i = 0; i < count; i++) {
 		if (mod[i].state == MODULE_STATE_GOING)
-			state_str = "Unloading";
+			printf("%-21s Unloading %-8u %-4d\n", mod[i].name,
+            		       mod[i].size, mod[i].references_count);
 		else if (mod[i].state == MODULE_STATE_COMING)
-			state_str = "Loading";
+			printf("%-21s Loading %-8u %-4d\n", mod[i].name,
+            		       mod[i].size, mod[i].references_count);
 		else
-			state_str = "Live";
-
-		printf("%-21s %-8s %-8u %-4d\n", mod[i].name, state_str,
-		       mod[i].size, mod[i].references_count);
+			printf("%-21s Live %-8u %-4d\n", mod[i].name,
+            		       mod[i].size, mod[i].references_count);
 	}
 }
 
 int main(int argc, char **argv) {
-	size_t *count = malloc(sizeof(size_t));
+	size_t *count = (size_t *) malloc(sizeof(size_t));
 
 	long ret = __lab_lsmod_count(count);
 
@@ -61,7 +60,7 @@ int main(int argc, char **argv) {
 
 	printf("Number of modules: %zu\n", *count);
 
-	struct lab_lsmod_module_info *modules_info =
+	struct lab_lsmod_module_info *modules_info = (struct lab_lsmod_module_info *)
 		malloc(sizeof(struct lab_lsmod_module_info) * (*count));
 
 	ret = __lab_lsmod(modules_info);
@@ -69,6 +68,7 @@ int main(int argc, char **argv) {
 	if (ret < 0) {
 		printf("System call __lab_lsmod error %s\n", strerror(-ret));
 		free(modules_info);
+		free(count);
 		return -1;
 	}
 
